@@ -11,17 +11,26 @@ import com.example.CS330_PZ.repository.ReviewsRepository;
 import com.example.CS330_PZ.repository.UserRepository;
 import com.example.CS330_PZ.service.ReviewsService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class ReviewsServiceUnitTests {
 
     @Test
@@ -80,5 +89,38 @@ public class ReviewsServiceUnitTests {
         verify(placeRepository).findById(1L);
         verify(reviewsRepository).save(any(Reviews.class));
         verify(placeRepository).save(any(Place.class));
+    }
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private ReviewsRepository reviewsRepository;
+
+    @InjectMocks
+    private ReviewsService reviewsService;
+
+    @Test
+    public void getReviewsForUserHappyFlow() {
+        String username = "user1";
+        User user = new User();
+        user.setUserId(1L);
+        user.setUsername(username);
+
+        given(userRepository.findByUsername(username)).willReturn(Optional.of(user));
+
+        Reviews review1 = new Reviews();
+        Reviews review2 = new Reviews();
+        List<Reviews> reviews = Arrays.asList(review1, review2);
+
+        given(reviewsRepository.getReviewsByUserId(1)).willReturn(reviews);
+
+        List<Reviews> result = reviewsService.getReviewsForUser(username);
+
+        assertEquals(2, result.size());
+
+        verify(userRepository).findByUsername(username);
+        verify(reviewsRepository).getReviewsByUserId(Math.toIntExact(user.getUserId()));
+
     }
 }
