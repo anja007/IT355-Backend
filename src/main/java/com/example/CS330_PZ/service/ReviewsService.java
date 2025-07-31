@@ -76,8 +76,6 @@ public class ReviewsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
 
-        System.out.println("✅ Found userId: " + user.getUserId());
-
         return reviewsRepository.getReviewsByUserId(Math.toIntExact(user.getUserId()));
     }
 
