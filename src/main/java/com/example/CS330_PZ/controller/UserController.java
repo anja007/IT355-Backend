@@ -8,6 +8,7 @@ import com.example.CS330_PZ.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -64,10 +65,15 @@ public ResponseEntity<JwtAuthResponseDTO> authenticate(@RequestBody LoginRequest
         Map<String, Object> response = new HashMap<>();
         response.put("userId", user.getUserId());
         response.put("username", user.getUsername());
+        response.put("role", user.getRole());
 
         return ResponseEntity.ok(response);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/allUsers")
+    public ResponseEntity<?> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
 
 }

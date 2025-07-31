@@ -1,6 +1,7 @@
 package com.example.CS330_PZ.service;
 
 import com.example.CS330_PZ.DTO.LoginRequestDTO;
+import com.example.CS330_PZ.DTO.UserResponseDTO;
 import com.example.CS330_PZ.enums.Role;
 import com.example.CS330_PZ.model.User;
 import com.example.CS330_PZ.repository.UserRepository;
@@ -13,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,15 +42,22 @@ public class UserService {
         userRepository.save(u);
     }
 
-
-
-
     public String login(LoginRequestDTO loginRequestDTO) {
         Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        String token = jwtTokenProvider.generateToken(auth);
+        return jwtTokenProvider.generateToken(auth);
+    }
 
-        return token;
+    public List<UserResponseDTO> getAllUsers() {
+        List<User> users = userRepository.getAllUsers();
+        return users.stream().map(u -> {
+            UserResponseDTO dto = new UserResponseDTO();
+            dto.setFirstName(u.getFirstName());
+            dto.setLastName(u.getLastName());
+            dto.setEmail(u.getEmail());
+            dto.setUsername(u.getUsername());
+            return dto;
+        }).collect(Collectors.toList());
     }
 }
