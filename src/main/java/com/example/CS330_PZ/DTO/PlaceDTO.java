@@ -1,11 +1,11 @@
 package com.example.CS330_PZ.DTO;
 
-import com.example.CS330_PZ.model.Category;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class PlaceDTO {
     private String name;
     private String address;
