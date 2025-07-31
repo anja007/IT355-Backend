@@ -20,4 +20,11 @@ public class CategoryService {
     public Optional<Category> getCategoryByCategoryId(){
         return categoryRepository.getCategoryByCategoryId();
     }
+
+    public Category addCategory(String categoryName) {
+        Category category = new Category();
+        category.setCategoryName(categoryName);
+
+        return categoryRepository.save(category);
+    }
 }
