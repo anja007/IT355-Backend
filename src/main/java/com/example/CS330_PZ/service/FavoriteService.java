@@ -21,6 +21,10 @@ public class FavoriteService {
 
         Place place = placeRepository.findById(placeId).orElseThrow(() -> new RuntimeException("Place not found"));
 
+        if (user.getFavoritePlaces().contains(place)) {
+            throw new RuntimeException("Place already in favorites");
+        }
+
         user.getFavoritePlaces().add(place);
         userRepository.save(user);
     }
