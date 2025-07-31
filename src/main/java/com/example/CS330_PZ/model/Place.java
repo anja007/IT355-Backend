@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -41,4 +42,19 @@ public class Place {
 
     @Column(name = "lng")
     private Double lng;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Place place = (Place) o;
+
+        return placeId != null && placeId.equals(place.placeId);
+    }
+
+    @Override
+    public int hashCode() {
+        return placeId != null ? placeId.hashCode() : 0;
+    }
 }
