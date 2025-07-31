@@ -20,25 +20,16 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 
     List<Place> findByCategoryId(Category category);
 
-    /*
-    @Query("SELECT p FROM Place p JOIN p.tags t WHERE " +
-            "LOWER(t) = LOWER(:keyword) OR " +
-            "(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(p.city) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(p.address) LIKE LOWER(CONCAT('%', :keyword, '%'))")
-    List<Place> searchByKeyword(@Param("keyword") String keyword);*/
-    @Query("SELECT DISTINCT p FROM Place p JOIN p.tags t WHERE " +
+   @Query("SELECT DISTINCT p FROM Place p JOIN p.tags t WHERE " +
             "LOWER(t) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(p.city) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(p.address) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Place> searchByKeyword(@Param("keyword") String keyword);
 
-
     List<Place> findTop5ByOrderByRatingDesc();
 
     Page<Place> findAll(Pageable pageable);
 
     Page<Place> findByNameContainingIgnoreCaseOrCityContainingIgnoreCaseOrAddressContainingIgnoreCase(String name, String city, String address, Pageable pageable);
-
 }
