@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class PlaceController {
     private final PlaceService placeService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/admin")
+    @PostMapping("/admin/add")
     public ResponseEntity<?> addPlace(@RequestBody PlaceDTO place) {
         try {
             return ResponseEntity.ok(placeService.createPlace(place));
@@ -36,10 +35,25 @@ public class PlaceController {
         } 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/admin/update/{placeId}")
+    public ResponseEntity<?> updatePlace(@PathVariable Long placeId, @RequestBody PlaceDTO dto){
+        return ResponseEntity.ok(placeService.updatePlace(placeId, dto));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/admin/delete/{placeId}")
+    public ResponseEntity<?> deletePlace(@PathVariable Long placeId) {
+        placeService.deletePlace(placeId);
+        return ResponseEntity.ok("Place deleted successfully.");
+    }
+
+
     @GetMapping("/all")
     public ResponseEntity<?> getPlaces() {
         return ResponseEntity.ok(placeService.getAllPlaces());
     }
+
     @GetMapping
     public ResponseEntity<Page<Place>> getAllPlaces(
             @RequestParam(defaultValue = "0") int page,
