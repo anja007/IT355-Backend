@@ -1,17 +1,14 @@
 package com.example.CS330_PZ.controller;
 
-import com.example.CS330_PZ.DTO.ReviewResponseDTO;
 import com.example.CS330_PZ.DTO.ReviewsDTO;
 import com.example.CS330_PZ.model.Reviews;
 import com.example.CS330_PZ.service.ReviewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +28,6 @@ public class ReviewsController {
         List<Reviews> reviews = reviewsService.getReviewsForUser(username);
         return ResponseEntity.ok(reviews);
     }
-
 
     @GetMapping("/review/{id}")
     public ResponseEntity<?> getReviewById(@PathVariable Long id) {
@@ -57,10 +53,9 @@ public class ReviewsController {
     public ResponseEntity<?> deleteReview(@PathVariable Long id) {
         boolean deleted = reviewsService.deleteReview(id);
         if (deleted) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Review deleted successfully.");
         } else {
             return ResponseEntity.status(403).body("You are not authorized to delete this review.");
         }
-
     }
 }
