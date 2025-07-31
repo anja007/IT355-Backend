@@ -3,21 +3,18 @@ package com.example.CS330_PZ.controller;
 import com.example.CS330_PZ.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/admin")
+@RequestMapping("/api/categories")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @GetMapping("/categories")
+    @GetMapping
     public ResponseEntity<?> getAllCategories(){
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
@@ -26,6 +23,12 @@ public class CategoryController {
     @GetMapping("{categoryId}")
     public ResponseEntity<?> getCategoryByCategoryId(){
         return ResponseEntity.ok(categoryService.getCategoryByCategoryId());
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/admin/add")
+    public ResponseEntity<?> addCategory(@RequestParam String categoryName) {
+        return ResponseEntity.ok(categoryService.addCategory(categoryName));
     }
 
 }
