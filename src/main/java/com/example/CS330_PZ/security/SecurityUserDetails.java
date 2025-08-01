@@ -48,7 +48,6 @@ public class SecurityUserDetails implements UserDetails {
         return true;
     }
 
-    //dodati ako hoces da korisnik moze da bude blokiran!!!
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
