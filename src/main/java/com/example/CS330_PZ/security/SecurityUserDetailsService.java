@@ -14,7 +14,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    //ovo je datasource
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
