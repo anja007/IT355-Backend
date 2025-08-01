@@ -33,36 +33,14 @@ public class WebAuthorizationConfig {
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(e -> e.authenticationEntryPoint(authEntryPointJWT()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/admin/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/register").permitAll()
+                        .requestMatchers("/api/auth/me").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/categories").permitAll()
+                        .requestMatchers("/api/favorites/**").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/api/places/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/auth/me").authenticated()
-                        .requestMatchers("/api/favorites/**").authenticated()
-                        .requestMatchers("/api/reviews/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/all", "/api/reviews/place/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                /*
-                .formLogin(form -> form
-                        .loginProcessingUrl("/api/auth/login")
-                        .successHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed");
-                        })
-                        .permitAll()
-                )*/
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);
-                        })
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
                 );
-
-                //.httpBasic(Customizer.withDefaults());
 
         http.addFilterBefore(jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class);
@@ -80,7 +58,8 @@ public class WebAuthorizationConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
