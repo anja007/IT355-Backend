@@ -16,11 +16,6 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.getAllCategories();
     }
-
-    public Optional<Category> getCategoryByCategoryId(){
-        return categoryRepository.getCategoryByCategoryId();
-    }
-
     public Category addCategory(String categoryName) {
         Category category = new Category();
         category.setCategoryName(categoryName);

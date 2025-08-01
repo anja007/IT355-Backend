@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-
     @Query("SELECT c FROM Category c")
     List<Category> getAllCategories();
 
-    @Query("SELECT c from Category c WHERE c.categoryId = :categoryId")
-    Optional<Category> getCategoryByCategoryId();
 }
