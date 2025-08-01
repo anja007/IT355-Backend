@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +26,9 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    private final AuthenticationManager authenticationManager;
-
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user){
-        if(userRepository.existsByUsername(user.getUsername())){
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity.badRequest().body("Username already taken!");
         }
 
@@ -39,13 +37,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-public ResponseEntity<JwtAuthResponseDTO> authenticate(@RequestBody LoginRequestDTO
-                                                            loginDto) {
-    String token = userService.login(loginDto);
-    JwtAuthResponseDTO jwtAuthResponse = new JwtAuthResponseDTO();
-    jwtAuthResponse.setAccessToken(token);
-    return ResponseEntity.ok(jwtAuthResponse);
-}
+    public ResponseEntity<?> authenticate(@RequestBody LoginRequestDTO
+                                                  loginDto) {
+        try {
+            String token = userService.login(loginDto);
+            JwtAuthResponseDTO jwtAuthResponse = new JwtAuthResponseDTO();
+            jwtAuthResponse.setAccessToken(token);
+            return ResponseEntity.ok(jwtAuthResponse);
+        } catch (BadCredentialsException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login error: " + ex.getMessage());
+        }
+    }
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
