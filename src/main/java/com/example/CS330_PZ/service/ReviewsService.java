@@ -13,10 +13,10 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,13 +35,15 @@ public class ReviewsService {
         place.setRating(avg);
         placeRepository.save(place);
     }
+    @Transactional
     public ReviewResponseDTO createReviews(ReviewsDTO dto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         Place place = placeRepository.findById((long) dto.getPlaceId())
-               .orElseThrow(() -> new IllegalArgumentException("Place not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Place not found"));
 
         Reviews reviews = new Reviews();
         reviews.setUserId(user);
@@ -52,6 +54,7 @@ public class ReviewsService {
 
         Reviews saved = reviewsRepository.save(reviews);
         updatePlaceRating(saved.getPlaceId());
+
         return getReviewResponseDTOS(List.of(saved)).get(0);
     }
 
@@ -65,13 +68,6 @@ public class ReviewsService {
         return getReviewResponseDTOS(reviews);
 
     }
-/*
-    public List<ReviewResponseDTO> getReviewsByUserId(Integer userId){
-        List<Reviews> reviews = reviewsRepository.getReviewsByUserId(userId);
-
-        return getReviewResponseDTOS(reviews);
-    }*/
-
     public List<Reviews> getReviewsForUser(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
@@ -79,22 +75,14 @@ public class ReviewsService {
         return reviewsRepository.getReviewsByUserId(Math.toIntExact(user.getUserId()));
     }
 
-
-    public ReviewResponseDTO getReviewById(Long id) {
-        Reviews review = reviewsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
-
-        return getReviewResponseDTOS(List.of(review)).get(0);
-    }
-
-    //helper method for above
     private List<ReviewResponseDTO> getReviewResponseDTOS(List<Reviews> reviews) {
         return reviews.stream().map(review -> {
             ReviewResponseDTO dto = new ReviewResponseDTO();
-            dto.setReviewId(review.getReviewId().toString());
+            dto.setReviewId(Math.toIntExact(review.getReviewId()));
             dto.setComment(review.getComment());
             dto.setRating(review.getRating());
             dto.setCreatedAt(String.valueOf(review.getCreatedAt()));
+
             dto.setUsername(review.getUserId().getUsername());
             dto.setFullName(review.getUserId().getFirstName() + " " + review.getUserId().getLastName());
             dto.setPlaceName(review.getPlaceId().getName());
@@ -105,6 +93,7 @@ public class ReviewsService {
         }).collect(Collectors.toList());
     }
 
+    @Transactional
     public ReviewResponseDTO updateReview(Long reviewId, ReviewsDTO dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -125,7 +114,6 @@ public class ReviewsService {
 
         return getReviewResponseDTOS(List.of(updated)).get(0);
     }
-
     public boolean deleteReview(Long reviewId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
