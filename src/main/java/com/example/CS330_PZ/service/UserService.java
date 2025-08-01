@@ -8,6 +8,7 @@ import com.example.CS330_PZ.repository.UserRepository;
 import com.example.CS330_PZ.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,10 +44,20 @@ public class UserService {
     }
 
     public String login(LoginRequestDTO loginRequestDTO) {
-        Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequestDTO.getUsername(),
+                            loginRequestDTO.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException ex) {
+            throw new BadCredentialsException("Invalid username or password");
+        }
 
-        return jwtTokenProvider.generateToken(auth);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return jwtTokenProvider.generateToken(authentication);
     }
 
     public List<UserResponseDTO> getAllUsers() {
