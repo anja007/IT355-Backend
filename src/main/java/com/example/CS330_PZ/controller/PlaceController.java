@@ -48,12 +48,6 @@ public class PlaceController {
         return ResponseEntity.ok("Place deleted successfully.");
     }
 
-
-    @GetMapping("/all")
-    public ResponseEntity<?> getPlaces() {
-        return ResponseEntity.ok(placeService.getAllPlaces());
-    }
-
     @GetMapping
     public ResponseEntity<Page<Place>> getAllPlaces(
             @RequestParam(defaultValue = "0") int page,
@@ -80,12 +74,14 @@ public class PlaceController {
         return ResponseEntity.ok(placeService.getPlacesByPlaceId(placeId));
     }
 
+    /*
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Place>> getPlacesByCategoryId(@PathVariable("categoryId") Long categoryId){
         List<Place> places = placeService.getPlacesByCategoryId(categoryId);
         return ResponseEntity.ok(places);
-    }
+    }*/
 
+    /*
     @GetMapping("/search")
     public ResponseEntity<?> searchByKeyword(@RequestParam String keyword){
         System.out.println("here");
@@ -96,15 +92,15 @@ public class PlaceController {
         }
 
         return ResponseEntity.ok(results);
-    }
+    }*/
 
+    /*
     @GetMapping("/place/{id}")
     public ResponseEntity<?> getPlaceById(@PathVariable Long id) {
         return ResponseEntity.ok(placeService.getPlacesByPlaceId(id));
-    }
+    }*/
 
-    //za prikaz na pocetnoj
-    @GetMapping("/top-rated")
+    @GetMapping("/topRated")
     public ResponseEntity<List<Place>> getTopRatedPlaces() {
         List<Place> topPlaces = placeService.getTop5RatedPlaces();
         return ResponseEntity.ok(topPlaces);
