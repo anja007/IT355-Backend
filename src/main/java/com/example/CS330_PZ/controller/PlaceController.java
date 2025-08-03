@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -58,6 +57,8 @@ public class PlaceController {
         return ResponseEntity.ok(placesPage);
     }
 
+    //ipak necu ovu - koristim onu dole
+    /*
     @GetMapping("/search/paginated")
     public ResponseEntity<Page<Place>> searchPlacesPaginated(
             @RequestParam String keyword,
@@ -66,6 +67,14 @@ public class PlaceController {
     ) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Place> result = placeService.searchPlaces(keyword, pageable);
+        return ResponseEntity.ok(result);
+    }*/
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchByKeyword(@RequestParam("keyword") String keyword, @RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Place> result = placeService.searchByKeyword(keyword, pageable);
         return ResponseEntity.ok(result);
     }
 
@@ -81,24 +90,6 @@ public class PlaceController {
         return ResponseEntity.ok(places);
     }*/
 
-    /*
-    @GetMapping("/search")
-    public ResponseEntity<?> searchByKeyword(@RequestParam String keyword){
-        System.out.println("here");
-        List<Place> results = placeService.searchByKeyword(keyword.trim());
-
-        if(results.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No results for searched term");
-        }
-
-        return ResponseEntity.ok(results);
-    }*/
-
-    /*
-    @GetMapping("/place/{id}")
-    public ResponseEntity<?> getPlaceById(@PathVariable Long id) {
-        return ResponseEntity.ok(placeService.getPlacesByPlaceId(id));
-    }*/
 
     @GetMapping("/topRated")
     public ResponseEntity<List<Place>> getTopRatedPlaces() {

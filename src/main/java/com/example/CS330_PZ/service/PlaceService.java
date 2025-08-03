@@ -55,66 +55,16 @@ public class PlaceService {
         return placeRepository.save(place);
     }
 
-    public List<Place> getAllPlaces() {
-        List<Place> places = placeRepository.getAllPlaces();
-        return places;
-    }
-
-    /*
-    public List<PlaceDTO> getAllPlaces() {
-        List<Place> places = placeRepository.findAll();
-        return places.stream()
-                .map(p -> {
-                    PlaceDTO dto = new PlaceDTO();
-                    dto.setName(p.getName());
-                    dto.setLocation(p.getLocation());
-                    dto.setRating(p.getRating());
-                    dto.setTags(p.getTags());
-                    return dto;
-                })
-                .collect(Collectors.toList());
-    }*/
-
-    /*
-    public Optional<Place> getPlaceById(Integer placeId){
-        return placeRepository.getPlaceById(placeId);
-    }
-    */
-
     public Optional<Place> getPlacesByPlaceId(Long placeId){
         return placeRepository.findById(placeId);
     }
 
+    //zasto je iskorisceno za unit testove?
     public List<Place> getPlacesByCategoryId(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
         return placeRepository.findByCategoryId(category);
-    }
-
-    public List<Place> searchByKeyword(String keyword) {
-        if (keyword == null || keyword.trim().isEmpty()) {
-            return placeRepository.findAll();
-        }
-
-        String lowerKeyword = keyword.toLowerCase();
-
-        List<Place> resultsFromDb = placeRepository.searchByKeyword(lowerKeyword);
-
-        return resultsFromDb.stream()
-                .filter(p -> {
-                    boolean matchName = Arrays.asList(p.getName().toLowerCase().split("\\s+")).contains(lowerKeyword);
-                    boolean matchCity = Arrays.asList(p.getCity().toLowerCase().split("\\s+")).contains(lowerKeyword);
-                    boolean matchAddress = Arrays.asList(p.getAddress().toLowerCase().split("\\s+")).contains(lowerKeyword);
-
-                    boolean matchTags = p.getTags() != null &&
-                            p.getTags().stream()
-                                    .map(String::toLowerCase)
-                                    .anyMatch(t -> t.contains(lowerKeyword));
-
-                    return matchName || matchCity || matchAddress || matchTags;
-                })
-                .toList();
     }
 
     public List<Place> getTop5RatedPlaces() {
@@ -125,11 +75,15 @@ public class PlaceService {
         return placeRepository.findAll(pageable);
     }
 
+    public Page<Place> searchByKeyword(String keyword, Pageable pageable) {
+        return placeRepository.searchByKeyword(keyword, pageable);
+    }
+
+    /*
     public Page<Place> searchPlaces(String keyword, Pageable pageable) {
         return placeRepository.findByNameContainingIgnoreCaseOrCityContainingIgnoreCaseOrAddressContainingIgnoreCase(keyword, keyword, keyword, pageable);
-    }
+    }*/
     public Place updatePlace(Long placeId, PlaceDTO dto) {
-        System.out.println("service");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         boolean isAdmin = authentication.getAuthorities().stream()
@@ -165,6 +119,4 @@ public class PlaceService {
 
         placeRepository.delete(place);
     }
-
-
 }
