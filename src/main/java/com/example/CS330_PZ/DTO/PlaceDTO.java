@@ -1,6 +1,5 @@
 package com.example.CS330_PZ.DTO;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.util.List;
 
