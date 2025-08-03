@@ -2,7 +2,6 @@ package com.example.CS330_PZ.config;
 
 import com.example.CS330_PZ.security.AuthEntryPointJWT;
 import com.example.CS330_PZ.security.JwtAuthenticationFilter;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
