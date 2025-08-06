@@ -51,6 +51,8 @@ public class PlaceService {
         place.setRating(dto.getRating() != null ? dto.getRating() : 0.0);
         place.setLat(coords.lat);
         place.setLng(coords.lng);
+        place.setPhotos(dto.getPhotos());
+
 
         return placeRepository.save(place);
     }

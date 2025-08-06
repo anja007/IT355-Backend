@@ -41,6 +41,13 @@ public class Place {
     @Column(name = "lng")
     private Double lng;
 
+    @ElementCollection
+    @CollectionTable(name = "place_photos", joinColumns = @JoinColumn(name = "place_id"))
+    @Column(name = "photo_url")
+    private List<String> photos = new ArrayList<>();
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

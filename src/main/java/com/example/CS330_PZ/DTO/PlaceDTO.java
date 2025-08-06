@@ -13,4 +13,7 @@ public class PlaceDTO {
     private int categoryId;
     private Double rating;
     private List<String> tags;
+    private List<String> photos;
+
+
 }
