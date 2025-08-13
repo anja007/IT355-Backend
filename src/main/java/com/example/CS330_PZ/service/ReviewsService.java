@@ -75,6 +75,13 @@ public class ReviewsService {
         return reviewsRepository.getReviewsByUserId(Math.toIntExact(user.getUserId()));
     }
 
+    public ReviewResponseDTO getReviewById(Long id) {
+        Reviews review = reviewsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        return getReviewResponseDTOS(List.of(review)).get(0);
+    }
+
     private List<ReviewResponseDTO> getReviewResponseDTOS(List<Reviews> reviews) {
         return reviews.stream().map(review -> {
             ReviewResponseDTO dto = new ReviewResponseDTO();
