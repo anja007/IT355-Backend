@@ -1,0 +1,287 @@
+[33mcommit b8f5c169ee68dacc9c0a194fd8132002b88bbee8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 16:00:39 2025 +0200
+
+    Added method
+
+[33mcommit c67193a941a886ae022255569ecb5f45efb20dce[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 16:00:12 2025 +0200
+
+    Deleted
+
+[33mcommit 3dd69277dc3f65db318761bf46f0e950530f6e12[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 16:00:00 2025 +0200
+
+    Changed to use @Mock
+
+[33mcommit 7fb2b83c164b12229470393382afc29df8ed2597[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 15:59:24 2025 +0200
+
+    Made minor changes
+
+[33mcommit 95ba7e37185ea40ab4c842988ddb89e2abe0c743[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 15:58:52 2025 +0200
+
+    Added method
+
+[33mcommit f4eb89f7e9dcd53aabd99472633440e7a587dfc8[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 15:57:48 2025 +0200
+
+    Changed method
+
+[33mcommit 7cd47a4fc9251e57c33968b7663af48144d2ba6f[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 15:57:03 2025 +0200
+
+    Made minor changes
+
+[33mcommit 90d6a6e79ccebb0eba9d6fcdb9445c53d6233c4d[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 13 15:56:43 2025 +0200
+
+    Made minor changes
+
+[33mcommit f83de3403f5fdb1a6f72e229a21fb02e447018f8[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 6 16:11:02 2025 +0200
+
+    Added integration test
+
+[33mcommit 527d156f07c0c6388ff8d9aea9e984d9c371c69f[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 6 16:10:37 2025 +0200
+
+    Made minor changes
+
+[33mcommit 9ae50bf08c61cfdc676454934084a43697e82f36[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Wed Aug 6 16:10:15 2025 +0200
+
+    Added for photos
+
+[33mcommit 460be6c5ecd124a0571ca03bbd3f4d2d388e92b3[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 16:17:29 2025 +0200
+
+    Made minor changes
+
+[33mcommit 8050a3b0a4082df7cfae22a5d6c343bc5e677119[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 16:16:23 2025 +0200
+
+    Made minor changes
+
+[33mcommit 595556fe8ed53ef4b76dc7055b9641b6457a4973[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 16:15:49 2025 +0200
+
+    Removed unused imports
+
+[33mcommit afdb9ffd895216e2e5c3f0b0410bbccf659f6d84[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 15:57:09 2025 +0200
+
+    Removed unused imports
+
+[33mcommit 532707ed0cd4286dc1aebd9939a34423a3961b26[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 15:49:52 2025 +0200
+
+    Removed unused imports
+
+[33mcommit 36338d55815c7dba99fc47926f8d95477982565b[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 15:49:08 2025 +0200
+
+    Removed unused imports
+
+[33mcommit 63f6a6afc254d382bee8677f1c0399f5b52692c3[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sun Aug 3 15:45:43 2025 +0200
+
+    Formatted
+
+[33mcommit 59c3425045c38e954aeb47f384e7cc6e89e8c737[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:47:31 2025 +0200
+
+    Removed unused code
+
+[33mcommit e28d44513d88b40ad4c126326e79ccdb438068b1[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:47:06 2025 +0200
+
+    Added exception handling
+
+[33mcommit e98a7123048173e2268e96e5a34fdc99ee23301b[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:46:30 2025 +0200
+
+    Made minor changes
+
+[33mcommit 07d62dcae333d010fd7a85942f0df14e54d8c15d[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:46:06 2025 +0200
+
+    Made minor changes
+
+[33mcommit fec5d1406d257a5011397c69348a8029039444ad[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:45:42 2025 +0200
+
+    Made minor changes
+
+[33mcommit ae15cceaed540ffdae62df2b850e3c2e3f70ead8[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:45:08 2025 +0200
+
+    Made minor changes
+
+[33mcommit f68042994ec7790012e2b02194f88c8d9d57374f[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:44:22 2025 +0200
+
+    Removed comments
+
+[33mcommit 7ddb305ebb5da6b15b805bee0c2409fedd0e2348[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:44:10 2025 +0200
+
+    Removed comments
+
+[33mcommit 455293f06354d35f75b9f84840c6db509e919e10[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:43:52 2025 +0200
+
+    Added @Transactional
+
+[33mcommit 6038ba094acabd7b626d01ff81cfd45996872445[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:42:50 2025 +0200
+
+    Added @PreAuthorize
+
+[33mcommit 49a8779e0449ddc2062d3b19c8794ff854eb6a8e[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:42:11 2025 +0200
+
+    Made minor changes
+
+[33mcommit 0a6d5182956c55f37d48869faf74847ccb3471ca[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:41:56 2025 +0200
+
+    Remove unused methods
+
+[33mcommit 0f68945d349405f5d52552d9290a6e3272e3836a[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Sat Aug 2 01:40:53 2025 +0200
+
+    Remove unused method
+
+[33mcommit 601aee4d1963039fb4deb9f058c5be9e9738a463[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:54:28 2025 +0200
+
+    Added getAllUsers for admin
+
+[33mcommit cb4c489a56fecf507fd73b69c8e7eb2379a2e0c1[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:54:12 2025 +0200
+
+    Added getAllUsers for admin
+
+[33mcommit b5897a1e86cde77b490ad7c7f610da788dbcd886[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:53:03 2025 +0200
+
+    Removed unused imports
+
+[33mcommit 82dbc5129e9f2a7b7019ea45eab304b1c0fb5b08[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:51:27 2025 +0200
+
+    Made minor changes
+
+[33mcommit 2632b4680df7526004083e466df66d5a434d447e[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:50:57 2025 +0200
+
+    Added schema for db
+
+[33mcommit c20623518b9938e3660a0fe02d37edc83fa2b036[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:50:37 2025 +0200
+
+    Added update and delete for admin
+
+[33mcommit 668eab02258e6fba002dc7f43bad6fbeefe70bad[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:48:32 2025 +0200
+
+    Removed comment
+
+[33mcommit cde90b6486efc42109548bc21dc0bd2ba8e861cd[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:47:25 2025 +0200
+
+    Added opencage dependency
+
+[33mcommit ae570f164b2bd366c8082ba2ecb1b7076dea8771[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:47:06 2025 +0200
+
+    Made minor changes
+
+[33mcommit 309e65830e33c0619c2552a15582439277e2f477[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:46:21 2025 +0200
+
+    Made minor changes in generating token
+
+[33mcommit ae40840b9a07a69fc08519a29a98d0665c1ff093[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:45:13 2025 +0200
+
+    Changed api for geocoding
+
+[33mcommit 1540608a6c4f3f7495372b72a33376b41905342d[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:44:35 2025 +0200
+
+    Added logic for checking if place is already in favorites
+
+[33mcommit 29e9e511bae4f33de1ca30e9cb11b56a5136513a[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:43:29 2025 +0200
+
+    Added opencage api key
+
+[33mcommit 0b3d7d68105e7f349939bb0cc0def84795cd9ae8[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:43:05 2025 +0200
+
+    Added addCategory for admin, and renamed routes
+
+[33mcommit 7b1b040697064be22648a9ec3baaea88904cff19[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:42:30 2025 +0200
+
+    Added addCategory for admin
+
+[33mcommit 2651aa17ac74ed17cf7dba8e6affdfc0ba9a81bd[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:41:30 2025 +0200
+
+    Added equals and hashcode
+
+[33mcommit 5a37f52c4207fe6c30836f8d33449c110524151e[m
+Author: anja007 <popovicanja972@gmail.com>
+Date:   Thu Jul 31 23:40:57 2025 +0200
+
+    Added equals and hashcode
