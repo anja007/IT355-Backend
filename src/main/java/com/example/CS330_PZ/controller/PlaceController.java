@@ -56,20 +56,7 @@ public class PlaceController {
         Page<Place> placesPage = placeService.getAllPlaces(pageable);
         return ResponseEntity.ok(placesPage);
     }
-
-    //ipak necu ovu - koristim onu dole
-    /*
-    @GetMapping("/search/paginated")
-    public ResponseEntity<Page<Place>> searchPlacesPaginated(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size
-    ) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Place> result = placeService.searchPlaces(keyword, pageable);
-        return ResponseEntity.ok(result);
-    }*/
-
+    
     @GetMapping("/search")
     public ResponseEntity<?> searchByKeyword(@RequestParam("keyword") String keyword,
                                              @RequestParam(defaultValue = "0") int page,
