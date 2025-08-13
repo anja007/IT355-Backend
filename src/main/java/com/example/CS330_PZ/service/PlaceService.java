@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -61,7 +62,6 @@ public class PlaceService {
         return placeRepository.findById(placeId);
     }
 
-    //zasto je iskorisceno za unit testove?
     public List<Place> getPlacesByCategoryId(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -70,7 +70,7 @@ public class PlaceService {
     }
 
     public List<Place> getTop5RatedPlaces() {
-        return placeRepository.findTop5ByOrderByRatingDesc();
+        return placeRepository.findTop5Places(PageRequest.of(0, 5));
     }
 
     public Page<Place> getAllPlaces(Pageable pageable) {
