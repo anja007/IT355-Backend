@@ -31,11 +31,11 @@ public class ReviewsController {
         return ResponseEntity.ok(reviews);
     }
 
-    /*
+
     @GetMapping("/review/{id}")
     public ResponseEntity<?> getReviewById(@PathVariable Long id) {
         return ResponseEntity.ok(reviewsService.getReviewById(id));
-    }*/
+    }
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/createReview")
