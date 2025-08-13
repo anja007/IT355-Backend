@@ -71,7 +71,8 @@ public class PlaceController {
     }*/
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchByKeyword(@RequestParam("keyword") String keyword, @RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<?> searchByKeyword(@RequestParam("keyword") String keyword,
+                                             @RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Place> result = placeService.searchByKeyword(keyword, pageable);
@@ -83,12 +84,11 @@ public class PlaceController {
         return ResponseEntity.ok(placeService.getPlacesByPlaceId(placeId));
     }
 
-    /*
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Place>> getPlacesByCategoryId(@PathVariable("categoryId") Long categoryId){
         List<Place> places = placeService.getPlacesByCategoryId(categoryId);
         return ResponseEntity.ok(places);
-    }*/
+    }
 
 
     @GetMapping("/topRated")
