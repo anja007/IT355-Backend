@@ -32,17 +32,3 @@ build/
 ### VS Code ###
 .vscode/
 
-# Java (Spring Boot)
-backend/target/
-backend/.idea/
-backend/*.iml
-
-# Node.js (React)
-frontend/node_modules/
-frontend/build/
-frontend/.env
-
-# OS/IDE
-.DS_Store
-*.log
-g
