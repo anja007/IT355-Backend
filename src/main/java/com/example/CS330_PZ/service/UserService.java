@@ -26,12 +26,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final ValidatorService emailValidatorService;
 
     public void registerUser(@RequestBody User user){
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email is already in use!");
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalArgumentException("Email is already in use!");
         }
 
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Username is already in use!");
+        }
         User u = new User();
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
@@ -39,6 +43,10 @@ public class UserService {
         u.setUsername(user.getUsername());
         u.setPassword(passwordEncoder.encode(user.getPassword()));
         u.setRole(Role.USER);
+
+        if (!emailValidatorService.isValidEmail(user.getEmail())) {
+            throw new IllegalArgumentException("Invalid email address!");
+        }
 
         userRepository.save(u);
     }

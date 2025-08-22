@@ -5,6 +5,7 @@ import com.example.CS330_PZ.DTO.LoginRequestDTO;
 import com.example.CS330_PZ.model.User;
 import com.example.CS330_PZ.repository.UserRepository;
 import com.example.CS330_PZ.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +28,18 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
-            return ResponseEntity.badRequest().body("Username already taken!");
+    public ResponseEntity<?> register(@Valid @RequestBody User user) {
+        try {
+            userService.registerUser(user);
+            return ResponseEntity.ok(Map.of("message", "User registered!"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
-
-        userService.registerUser(user);
-        return ResponseEntity.ok("User registered!");
     }
 
+
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody LoginRequestDTO
+    public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequestDTO
                                                   loginDto) {
         try {
             String token = userService.login(loginDto);
