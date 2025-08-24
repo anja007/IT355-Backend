@@ -1,4 +1,4 @@
-package com.example.CS330_PZ;
+package com.example.CS330_PZ.unit_tests;
 
 import com.example.CS330_PZ.model.Place;
 import com.example.CS330_PZ.model.User;
