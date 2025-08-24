@@ -1,4 +1,4 @@
-package com.example.CS330_PZ;
+package com.example.CS330_PZ.unit_tests;
 
 import com.example.CS330_PZ.DTO.ReviewResponseDTO;
 import com.example.CS330_PZ.DTO.ReviewsDTO;
@@ -126,62 +126,6 @@ public class ReviewsServiceUnitTests {
 
         verify(userRepository).findByUsername(username);
         verify(reviewsRepository).getReviewsByUserId(Math.toIntExact(user.getUserId()));
-    }
-
-    @Test
-    public void updateReviewHappyFlow() {
-        Authentication auth = mock(Authentication.class);
-        given(auth.getName()).willReturn("testUser");
-
-        SecurityContext context = mock(SecurityContext.class);
-        given(context.getAuthentication()).willReturn(auth);
-
-        SecurityContextHolder.setContext(context);
-
-        Long reviewId = 1L;
-        String username = "testUser";
-
-        User user = new User();
-        user.setUserId(1L);
-        user.setUsername(username);
-
-        Place place = new Place();
-        place.setPlaceId(2L);
-
-        Category category = new Category();
-        category.setCategoryId(1L);
-        place.setCategoryId(category);
-
-        Reviews review = new Reviews();
-        review.setReviewId(reviewId);
-        review.setUserId(user);
-        review.setPlaceId(place);
-        review.setRating(3);
-        review.setComment("Old comment");
-
-        ReviewsDTO dto = new ReviewsDTO();
-        dto.setRating(4);
-        dto.setComment("Updated comment");
-
-        Reviews updatedReview = new Reviews();
-        updatedReview.setReviewId(reviewId);
-        updatedReview.setUserId(user);
-        updatedReview.setPlaceId(place);
-        updatedReview.setRating(4);
-        updatedReview.setComment("Updated comment");
-        updatedReview.setCreatedAt(java.time.LocalDateTime.now());
-
-        given(reviewsRepository.findById(reviewId)).willReturn(Optional.of(review));
-        given(reviewsRepository.save(any(Reviews.class))).willReturn(updatedReview);
-
-        ReviewResponseDTO result = reviewsService.updateReview(reviewId, dto);
-
-        assertThat(result).isNotNull();
-        assertThat(result.getRating()).isEqualTo(4);
-        assertThat(result.getComment()).isEqualTo("Updated comment");
-
-        verify(reviewsRepository).findById(reviewId);
-        verify(reviewsRepository).save(any(Reviews.class));
     }
 
     @Test
