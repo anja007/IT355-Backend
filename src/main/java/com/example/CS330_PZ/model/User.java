@@ -35,7 +35,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Username is required.")
-    @Size(min = 4, max = 30, message = "Username must be between 4 and 30 characters.")
+    @Size(min = 3, max = 30, message = "Username must be between 3 and 30 characters.")
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
