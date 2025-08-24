@@ -8,6 +8,7 @@ import com.example.CS330_PZ.model.User;
 import com.example.CS330_PZ.repository.PlaceRepository;
 import com.example.CS330_PZ.repository.ReviewsRepository;
 import com.example.CS330_PZ.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -48,6 +49,8 @@ public class ReviewsService {
         Reviews reviews = new Reviews();
         reviews.setUserId(user);
         reviews.setPlaceId(place);
+
+        //validatorService.validateRating(dto.getRating());
         reviews.setRating(dto.getRating());
         reviews.setComment(dto.getComment());
         reviews.setCreatedAt(LocalDateTime.now());
@@ -126,12 +129,13 @@ public class ReviewsService {
         String username = authentication.getName();
 
         Reviews existingReview = reviewsRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Review with id " + reviewId + " not found"));
 
-        if (existingReview.getUserId().getUsername().equals(username)) {
-            reviewsRepository.delete(existingReview);
-            return true;
+        if (!existingReview.getUserId().getUsername().equals(username)) {
+            throw new AccessDeniedException("You are not authorized to delete this review");
         }
-        return false;
+
+        reviewsRepository.delete(existingReview);
+        return true;
     }
 }

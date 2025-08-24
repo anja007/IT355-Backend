@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/places")
@@ -61,8 +62,17 @@ public class PlaceController {
     public ResponseEntity<?> searchByKeyword(@RequestParam("keyword") String keyword,
                                              @RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "5") int size) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Keyword must not be empty"));
+        }
+
         Pageable pageable = PageRequest.of(page, size);
         Page<Place> result = placeService.searchByKeyword(keyword, pageable);
+        if (result.isEmpty()) {
+            return ResponseEntity.ok(Map.of("message", "No matches found. Try again."));
+        }
+
         return ResponseEntity.ok(result);
     }
 

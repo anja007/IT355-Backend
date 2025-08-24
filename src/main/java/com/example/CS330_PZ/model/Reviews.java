@@ -21,10 +21,10 @@ public class Reviews {
     @JoinColumn(name = "place_id", nullable = false)
     private Place placeId;
 
-    @Column(name = "rating")
-    private int rating;
+    @Column(name = "rating", nullable = false)
+    private Integer rating;
 
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false)
     private String comment;
 
     @Column(name = "created_at")

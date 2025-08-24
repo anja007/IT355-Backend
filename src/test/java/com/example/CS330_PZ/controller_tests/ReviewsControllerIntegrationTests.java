@@ -1,4 +1,4 @@
-package com.example.CS330_PZ.integrationTests;
+package com.example.CS330_PZ.controller_tests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
