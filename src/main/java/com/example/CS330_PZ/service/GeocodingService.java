@@ -38,7 +38,7 @@ public class GeocodingService {
         double lat;
         double lng;
 
-        LatLng(double lat, double lng) {
+        public LatLng(double lat, double lng) {
             this.lat = lat;
             this.lng = lng;
         }

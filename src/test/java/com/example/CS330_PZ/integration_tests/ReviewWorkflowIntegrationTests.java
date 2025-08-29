@@ -42,8 +42,6 @@ class ReviewWorkflowIntegrationTests {
     @Autowired private PasswordEncoder passwordEncoder;
 
     private long placeId;
-
-    // usklađeno sa kontrolerom: POST /api/reviews/createReview
     private static final String REVIEW_CREATE_ENDPOINT = "/api/reviews/createReview";
 
     @BeforeEach
@@ -127,6 +125,6 @@ class ReviewWorkflowIntegrationTests {
             if (node.hasNonNull("accessToken")) return node.get("accessToken").asText();
             if (node.hasNonNull("token")) return node.get("token").asText();
         } catch (Exception ignored) {}
-        throw new IllegalStateException("JWT nije pronađen u login odgovoru: " + loginResponse);
+        throw new IllegalStateException("JWT not found: " + loginResponse);
     }
 }

@@ -21,21 +21,18 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// Pokreće ceo kontekst, auto-konfiguriše MockMvc (bez stvarnog servera)
 @SpringBootTest
 @AutoConfigureMockMvc
 class RegisterUserControllerTests {
 
     @Autowired MockMvc mvc;
 
-    // Mokuješ bean-ove ispod UserService:
     @MockBean UserRepository userRepository;
     @MockBean PasswordEncoder passwordEncoder;
     @MockBean ValidatorService emailValidatorService;
     @MockBean AuthenticationManager authenticationManager;
     @MockBean JwtTokenProvider jwtTokenProvider;
 
-    // ====== REGISTER ======
     @Test
     void register_integration_success_201() throws Exception {
         when(userRepository.existsByEmail("ana@example.com")).thenReturn(false);
@@ -70,7 +67,6 @@ class RegisterUserControllerTests {
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Email is already in use")));
     }
 
-    // ====== LOGIN ======
     @Test
     void login_integration_success_200_token() throws Exception {
         Authentication auth = mock(Authentication.class);

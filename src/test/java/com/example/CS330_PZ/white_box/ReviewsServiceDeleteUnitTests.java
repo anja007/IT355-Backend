@@ -6,7 +6,6 @@ import com.example.CS330_PZ.repository.ReviewsRepository;
 import com.example.CS330_PZ.service.ReviewsService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -77,7 +77,6 @@ class RegisterUserIntegrationTests {
 
     @Test
     void registerUser_invalidEmail_throwsException() {
-        // Arrange
         User user = new User();
         user.setFirstName("John");
         user.setLastName("Doe");

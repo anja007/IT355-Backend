@@ -61,6 +61,7 @@ public class UpdateReviewUnitTests {
     void tearDown() {
         SecurityContextHolder.clearContext();
     }
+
     @Test
     public void updateReviewHappyFlow() {
         when(authentication.getName()).thenReturn("testUser");

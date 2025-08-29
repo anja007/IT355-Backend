@@ -50,7 +50,6 @@ public class ReviewsService {
         reviews.setUserId(user);
         reviews.setPlaceId(place);
 
-        //validatorService.validateRating(dto.getRating());
         reviews.setRating(dto.getRating());
         reviews.setComment(dto.getComment());
         reviews.setCreatedAt(LocalDateTime.now());

@@ -49,7 +49,9 @@ public class PlaceService {
         place.setCity(dto.getCity());
         place.setCategoryId(category);
         place.setTags(dto.getTags());
-        place.setRating(dto.getRating() != null ? dto.getRating() : 0.0);
+        place.setRating(dto.getRating() != null
+                ? Math.round(dto.getRating() * 10.0) / 10.0
+                : 0.0);
         place.setLat(coords.lat);
         place.setLng(coords.lng);
         place.setPhotos(dto.getPhotos());
